@@ -1,0 +1,15 @@
+[submodule "next-client"]
+	path = next-client
+	url = https://github.com/DeliCasa/NextClient.git
+[submodule "BridgeServer"]
+	path = BridgeServer
+	url = https://github.com/DeliCasa/BridgeServer.git
+[submodule "Docs"]
+	path = Docs
+	url = https://github.com/DeliCasa/Documentation.git
+[submodule "EspCamV2"]
+	path = EspCamV2
+	url = https://github.com/DeliCasa/EspCamV2.git
+[submodule "PiOrchestrator"]
+	path = PiOrchestrator
+	url = https://github.com/DeliCasa/PiOrchestrator.git
