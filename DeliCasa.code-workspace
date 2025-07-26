@@ -1,0 +1,168 @@
+{
+  "folders": [
+    {
+      "name": "🏠 DeliCasa - Root",
+      "path": "."
+    },
+    {
+      "name": "🌐 NextClient (Frontend)",
+      "path": "./next-client"
+    },
+    {
+      "name": "🔗 BridgeServer (Backend)",
+      "path": "./BridgeServer"
+    },
+    {
+      "name": "🍓 PiOrchestrator (IoT)",
+      "path": "./PiOrchestrator"
+    },
+    {
+      "name": "📷 EspCamV2 (Firmware)",
+      "path": "./EspCamV2"
+    },
+
+    {
+      "name": "📚 Documentation",
+      "path": "./Docs"
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
+    "typescript.preferences.includePackageJsonAutoImports": "on",
+    "go.toolsManagement.autoUpdate": true,
+    "files.exclude": {
+      "**/.git": false,
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/.wrangler": true,
+      "**/dist": true,
+      "**/build": true,
+      "**/.pio": true,
+      "**/.platformio": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/.wrangler": true,
+      "**/dist": true,
+      "**/build": true,
+      "**/.pio": true,
+      "**/.platformio": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-vscode.vscode-typescript-next",
+      "bradlc.vscode-tailwindcss",
+      "ms-vscode.vscode-json",
+      "golang.go",
+      "platformio.platformio-ide",
+
+      "yzhang.markdown-all-in-one",
+      "davidanson.vscode-markdownlint",
+      "redhat.vscode-yaml",
+      "ms-vscode.hexeditor"
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "🌐 NextClient Dev",
+        "type": "node",
+        "request": "launch",
+        "cwd": "${workspaceFolder}/next-client",
+        "runtimeExecutable": "pnpm",
+        "runtimeArgs": ["run", "dev"]
+      },
+      {
+        "name": "🔗 BridgeServer Dev",
+        "type": "node",
+        "request": "launch",
+        "cwd": "${workspaceFolder}/BridgeServer",
+        "runtimeExecutable": "pnpm",
+        "runtimeArgs": ["run", "dev"]
+      },
+      {
+        "name": "🍓 PiOrchestrator Debug",
+        "type": "go",
+        "request": "launch",
+        "mode": "auto",
+        "program": "${workspaceFolder}/PiOrchestrator/cmd/piorchestrator",
+        "cwd": "${workspaceFolder}/PiOrchestrator"
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "📦 Build NextClient",
+        "type": "shell",
+        "command": "pnpm",
+        "args": ["run", "build"],
+        "options": {
+          "cwd": "${workspaceFolder}/next-client"
+        },
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "panel": "new"
+        },
+        "problemMatcher": ["$tsc"]
+      },
+      {
+        "label": "🔗 Build BridgeServer",
+        "type": "shell",
+        "command": "pnpm",
+        "args": ["run", "build"],
+        "options": {
+          "cwd": "${workspaceFolder}/BridgeServer"
+        },
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "panel": "new"
+        },
+        "problemMatcher": ["$tsc"]
+      },
+      {
+        "label": "🍓 Build PiOrchestrator",
+        "type": "shell",
+        "command": "make",
+        "args": ["build"],
+        "options": {
+          "cwd": "${workspaceFolder}/PiOrchestrator"
+        },
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "panel": "new"
+        },
+        "problemMatcher": ["$go"]
+      },
+      {
+        "label": "📷 Build EspCamV2",
+        "type": "shell",
+        "command": "pio",
+        "args": ["run"],
+        "options": {
+          "cwd": "${workspaceFolder}/EspCamV2"
+        },
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "panel": "new"
+        },
+        "problemMatcher": []
+      }
+    ]
+  }
+}
