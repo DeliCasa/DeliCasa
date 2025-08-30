@@ -1,0 +1,140 @@
+# DeliCasa Docker Compose Development Environment
+# This configuration sets up Next Client and Bridge Server for local development
+# Pi Orchestrator runs on actual hardware via SSH connection
+
+version: '3.8'
+
+name: delicasa-dev
+
+services:
+  # Next.js Client Application
+  next-client:
+    build:
+      context: ./next-client
+      dockerfile: Dockerfile.dev
+      args:
+        - NODE_ENV=development
+        - NEXT_PUBLIC_BRIDGE_WORKER_URL=${BRIDGE_SERVER_URL:-http://localhost:8080}
+        - NEXT_PUBLIC_PI_ORCHESTRATOR_URL=${PI_ORCHESTRATOR_URL:-http://localhost:9000}
+    container_name: delicasa-next-client
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount source code for hot reloading
+      - ./next-client:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+      - FAST_REFRESH=true
+      # Environment variables for development
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - DELICASA_NEXTAUTH_SECRET=${DELICASA_NEXTAUTH_SECRET}
+      # AWS Cognito Configuration
+      - DELICASA_COGNITO_USER_POOL_ID=${DELICASA_COGNITO_USER_POOL_ID}
+      - DELICASA_COGNITO_APP_CLIENT_ID=${DELICASA_COGNITO_APP_CLIENT_ID}
+      - DELICASA_COGNITO_REGION=${DELICASA_COGNITO_REGION:-us-east-1}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      # Database Configuration
+      - DATABASE_URL=${DATABASE_URL}
+      # Remote Service URLs (typically pointing to deployed versions)
+      - NEXT_PUBLIC_BRIDGE_WORKER_URL=${BRIDGE_SERVER_URL:-https://bridgeserver.delicasa.workers.dev}
+      - NEXT_PUBLIC_PI_ORCHESTRATOR_URL=${PI_ORCHESTRATOR_URL:-http://192.168.1.100:9000}
+      # Stripe Configuration
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
+    networks:
+      - delicasa-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Bridge Server (Cloudflare Worker emulated locally)
+  bridge-server:
+    build:
+      context: ./BridgeServer
+      dockerfile: Dockerfile.dev
+    container_name: delicasa-bridge-server
+    ports:
+      - "8080:8080"
+    volumes:
+      # Mount source code for hot reloading
+      - ./BridgeServer:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=8080
+      # Database Configuration
+      - DATABASE_URL=${DATABASE_URL}
+      # Cloudflare R2 Configuration
+      - CLOUDFLARE_ACCOUNT_ID=${CLOUDFLARE_ACCOUNT_ID}
+      - CLOUDFLARE_R2_ACCESS_KEY_ID=${CLOUDFLARE_R2_ACCESS_KEY_ID}
+      - CLOUDFLARE_R2_SECRET_ACCESS_KEY=${CLOUDFLARE_R2_SECRET_ACCESS_KEY}
+      - CLOUDFLARE_R2_BUCKET_NAME=${CLOUDFLARE_R2_BUCKET_NAME}
+      # AWS Services Configuration
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      # Cognito Configuration
+      - DELICASA_COGNITO_USER_POOL_ID=${DELICASA_COGNITO_USER_POOL_ID}
+      - DELICASA_COGNITO_APP_CLIENT_ID=${DELICASA_COGNITO_APP_CLIENT_ID}
+      - DELICASA_COGNITO_REGION=${DELICASA_COGNITO_REGION:-us-east-1}
+      # External Service URLs
+      - PI_ORCHESTRATOR_URL=${PI_ORCHESTRATOR_URL:-http://192.168.1.100:9000}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      # Stripe Configuration
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+    networks:
+      - delicasa-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Pi Orchestrator SSH Manager Service
+  # This service manages SSH connections to the actual Raspberry Pi
+  pi-orchestrator-manager:
+    image: alpine/socat:latest
+    container_name: delicasa-pi-manager
+    ports:
+      - "9000:9000"
+    environment:
+      - PI_HOST=${PI_HOST:-192.168.1.100}
+      - PI_PORT=${PI_PORT:-9000}
+      - PI_SSH_PORT=${PI_SSH_PORT:-22}
+      - PI_USERNAME=${PI_USERNAME:-pi}
+    volumes:
+      # Mount SSH keys for Pi connection
+      - ~/.ssh:/root/.ssh:ro
+      - ./scripts/pi-manager:/scripts:ro
+    command: >
+      sh -c "
+      echo 'Starting Pi Orchestrator Manager...';
+      echo 'Forwarding localhost:9000 to ${PI_HOST:-192.168.1.100}:${PI_PORT:-9000}';
+      socat TCP-LISTEN:9000,fork TCP:${PI_HOST:-192.168.1.100}:${PI_PORT:-9000}
+      "
+    networks:
+      - delicasa-network
+    restart: unless-stopped
+
+networks:
+  delicasa-network:
+    driver: bridge
+    name: delicasa-dev-network
+
+volumes:
+  next_node_modules:
+    name: delicasa-next-node-modules
+  bridge_node_modules:
+    name: delicasa-bridge-node-modules
