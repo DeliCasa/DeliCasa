@@ -23,7 +23,12 @@ jobs:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
         with:
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
+        with:
           fetch-depth: 0
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
@@ -75,6 +80,9 @@ jobs:
     steps:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
@@ -142,6 +150,9 @@ jobs:
     steps:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
@@ -180,6 +191,9 @@ jobs:
     steps:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🐹 Setup Go
         uses: actions/setup-go@v5
@@ -222,6 +236,9 @@ jobs:
     steps:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
@@ -274,6 +291,9 @@ jobs:
     steps:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
@@ -320,6 +340,9 @@ jobs:
     steps:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
