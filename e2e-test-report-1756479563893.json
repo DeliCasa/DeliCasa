@@ -1,0 +1,75 @@
+{
+  "testSuite": "DeliCasa E2E Customer Purchase Flow",
+  "timestamp": "2025-08-29T14:59:23.893Z",
+  "duration": "0.09s",
+  "success": false,
+  "startTime": 1756479563798,
+  "steps": [
+    {
+      "step": "QR_SCAN",
+      "status": "PROGRESS",
+      "timestamp": 1756479563804,
+      "duration": 0,
+      "message": "Simulating QR code scan..."
+    },
+    {
+      "step": "QR_SCAN",
+      "status": "SUCCESS",
+      "timestamp": 1756479563804,
+      "duration": 0,
+      "message": "QR code scanned, session created",
+      "data": {
+        "sessionId": "session_1756479563804_0lmfexizw"
+      }
+    },
+    {
+      "step": "AUTH_REQUEST",
+      "status": "PROGRESS",
+      "timestamp": 1756479563805,
+      "duration": 0,
+      "message": "Testing authentication..."
+    },
+    {
+      "step": "AUTH_REQUEST",
+      "status": "SUCCESS",
+      "timestamp": 1756479563881,
+      "duration": 27,
+      "message": "Authentication successful",
+      "data": {
+        "userId": "customer@delicasa.com",
+        "role": "USER",
+        "sessionId": "session_1756479563804_0lmfexizw"
+      }
+    },
+    {
+      "step": "CONTROLLER_LIST",
+      "status": "PROGRESS",
+      "timestamp": 1756479563882,
+      "duration": 0,
+      "message": "Fetching available containers..."
+    },
+    {
+      "step": "PRODUCT_SELECTION",
+      "status": "ERROR",
+      "timestamp": 1756479563892,
+      "duration": 0,
+      "message": "Failed to fetch controllers: undefined"
+    }
+  ],
+  "errors": [
+    {
+      "step": "PRODUCT_SELECTION",
+      "error": "Failed to fetch controllers: undefined",
+      "timestamp": 1756479563892
+    }
+  ],
+  "metrics": {
+    "totalDurationMs": 94,
+    "totalDurationSec": "0.09",
+    "successfulSteps": 2,
+    "totalSteps": 3,
+    "successRate": "66.7",
+    "errorCount": 1,
+    "averageStepDuration": "31"
+  }
+}

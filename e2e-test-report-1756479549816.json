@@ -1,0 +1,56 @@
+{
+  "testSuite": "DeliCasa E2E Customer Purchase Flow",
+  "timestamp": "2025-08-29T14:59:09.816Z",
+  "duration": "0.01s",
+  "success": false,
+  "startTime": 1756479549803,
+  "steps": [
+    {
+      "step": "QR_SCAN",
+      "status": "PROGRESS",
+      "timestamp": 1756479549810,
+      "duration": 0,
+      "message": "Simulating QR code scan..."
+    },
+    {
+      "step": "QR_SCAN",
+      "status": "SUCCESS",
+      "timestamp": 1756479549811,
+      "duration": 0,
+      "message": "QR code scanned, session created",
+      "data": {
+        "sessionId": "session_1756479549811_icai3yicg"
+      }
+    },
+    {
+      "step": "AUTH_REQUEST",
+      "status": "PROGRESS",
+      "timestamp": 1756479549811,
+      "duration": 0,
+      "message": "Testing authentication..."
+    },
+    {
+      "step": "AUTHENTICATION",
+      "status": "ERROR",
+      "timestamp": 1756479549815,
+      "duration": 0,
+      "message": "Cannot find package 'node-fetch' imported from /home/notroot/Documents/Code/CITi/DeliCasa/comprehensive-e2e-test.js"
+    }
+  ],
+  "errors": [
+    {
+      "step": "AUTHENTICATION",
+      "error": "Cannot find package 'node-fetch' imported from /home/notroot/Documents/Code/CITi/DeliCasa/comprehensive-e2e-test.js",
+      "timestamp": 1756479549815
+    }
+  ],
+  "metrics": {
+    "totalDurationMs": 12,
+    "totalDurationSec": "0.01",
+    "successfulSteps": 1,
+    "totalSteps": 2,
+    "successRate": "50.0",
+    "errorCount": 1,
+    "averageStepDuration": "6"
+  }
+}

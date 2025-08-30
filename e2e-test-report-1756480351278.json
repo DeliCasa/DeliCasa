@@ -1,0 +1,338 @@
+{
+  "testSuite": "DeliCasa E2E Customer Purchase Flow",
+  "timestamp": "2025-08-29T15:12:31.278Z",
+  "duration": "22.51s",
+  "success": true,
+  "startTime": 1756480328770,
+  "steps": [
+    {
+      "step": "QR_SCAN",
+      "status": "PROGRESS",
+      "timestamp": 1756480328777,
+      "duration": 0,
+      "message": "Simulating QR code scan..."
+    },
+    {
+      "step": "QR_SCAN",
+      "status": "SUCCESS",
+      "timestamp": 1756480328777,
+      "duration": 0,
+      "message": "QR code scanned, session created",
+      "data": {
+        "sessionId": "session_1756480328777_xiqpx117p"
+      }
+    },
+    {
+      "step": "AUTH_REQUEST",
+      "status": "PROGRESS",
+      "timestamp": 1756480328777,
+      "duration": 0,
+      "message": "Testing authentication..."
+    },
+    {
+      "step": "AUTH_REQUEST",
+      "status": "SUCCESS",
+      "timestamp": 1756480328851,
+      "duration": 25,
+      "message": "Authentication successful",
+      "data": {
+        "userId": "customer@delicasa.com",
+        "role": "USER",
+        "sessionId": "session_1756480328777_xiqpx117p"
+      }
+    },
+    {
+      "step": "CONTROLLER_LIST",
+      "status": "PROGRESS",
+      "timestamp": 1756480328851,
+      "duration": 0,
+      "message": "Fetching available containers..."
+    },
+    {
+      "step": "CONTROLLER_LIST",
+      "status": "SUCCESS",
+      "timestamp": 1756480330192,
+      "duration": 1340,
+      "message": "Found 2 controllers, selected: piorches-mewv58x9-b827",
+      "data": {
+        "totalControllers": 2,
+        "selectedController": {
+          "id": "piorches-mewv58x9-b827",
+          "name": "PiOrchestrator-FINAL-TEST",
+          "status": "online",
+          "location": "Test Kitchen Final"
+        }
+      }
+    },
+    {
+      "step": "PRODUCT_SELECTION",
+      "status": "PROGRESS",
+      "timestamp": 1756480330192,
+      "duration": 0,
+      "message": "Customer selecting product..."
+    },
+    {
+      "step": "PRODUCT_SELECTION",
+      "status": "SUCCESS",
+      "timestamp": 1756480330192,
+      "duration": 0,
+      "message": "Product selected, purchase initiated",
+      "data": {
+        "product": {
+          "id": "prod_001",
+          "name": "Coca-Cola 350ml",
+          "price": 5.5,
+          "container_slot": "A1"
+        },
+        "purchaseId": "purchase_1756480330192_axsxv6cza",
+        "containerId": "container_001",
+        "controllerId": "piorches-mewv58x9-b827"
+      }
+    },
+    {
+      "step": "DOOR_OPEN_COMMAND",
+      "status": "PROGRESS",
+      "timestamp": 1756480330193,
+      "duration": 0,
+      "message": "Sending door open command to controller piorches-mewv58x9-b827..."
+    },
+    {
+      "step": "DOOR_OPEN_COMMAND",
+      "status": "SUCCESS",
+      "timestamp": 1756480331295,
+      "duration": 1102,
+      "message": "tRPC door command sent successfully",
+      "data": {
+        "result": {
+          "data": {
+            "status": "OK",
+            "time": "2025-08-29T15:12:11.291Z",
+            "db": true,
+            "r2": true,
+            "uptime": 2391.137453939
+          }
+        }
+      }
+    },
+    {
+      "step": "PI_COMMUNICATION",
+      "status": "PROGRESS",
+      "timestamp": 1756480331295,
+      "duration": 0,
+      "message": "Testing Pi communication..."
+    },
+    {
+      "step": "PI_COMMUNICATION",
+      "status": "SUCCESS",
+      "timestamp": 1756480331757,
+      "duration": 457,
+      "message": "Pi Orchestrator responding",
+      "data": {
+        "cameras": [
+          {
+            "device_id": "cam-E6B4",
+            "status": "online",
+            "heap": 32380,
+            "wifi_rssi": -42,
+            "uptime": 38091,
+            "last_seen": "2025-08-29T16:11:56.554826263+01:00"
+          }
+        ],
+        "status": "ok",
+        "time": "2025-08-29T16:12:11+01:00"
+      }
+    },
+    {
+      "step": "DOOR_OPENING",
+      "status": "PROGRESS",
+      "timestamp": 1756480331757,
+      "duration": 0,
+      "message": "Door opening... (simulated 3s delay)"
+    },
+    {
+      "step": "DOOR_OPENING",
+      "status": "SUCCESS",
+      "timestamp": 1756480334758,
+      "duration": 0,
+      "message": "Container door opened successfully"
+    },
+    {
+      "step": "CAPTURE_BEFORE",
+      "status": "PROGRESS",
+      "timestamp": 1756480334759,
+      "duration": 0,
+      "message": "Capturing \"before\" image from ESP32-CAM..."
+    },
+    {
+      "step": "CAPTURE_BEFORE",
+      "status": "SUCCESS",
+      "timestamp": 1756480336759,
+      "duration": 0,
+      "message": "Before image captured successfully",
+      "data": {
+        "imageId": "img_before_1756480336759",
+        "captureRequest": {
+          "deviceId": "esp32_cam_001",
+          "quality": "high",
+          "type": "before_purchase",
+          "purchaseId": "purchase_1756480330192_axsxv6cza",
+          "timestamp": "2025-08-29T15:12:14.759Z"
+        },
+        "imageSize": "2.3MB",
+        "resolution": "1600x1200",
+        "processingTime": "2.1s"
+      }
+    },
+    {
+      "step": "CUSTOMER_INTERACTION",
+      "status": "PROGRESS",
+      "timestamp": 1756480336760,
+      "duration": 0,
+      "message": "Waiting for customer to take product... (simulated 10s)"
+    },
+    {
+      "step": "CAPTURE_AFTER",
+      "status": "PROGRESS",
+      "timestamp": 1756480341764,
+      "duration": 0,
+      "message": "Capturing \"after\" image to verify product taken..."
+    },
+    {
+      "step": "CAPTURE_AFTER",
+      "status": "SUCCESS",
+      "timestamp": 1756480343767,
+      "duration": 0,
+      "message": "After image captured, analyzing difference...",
+      "data": {
+        "imageId": "img_after_1756480343767",
+        "analysis": {
+          "productRemoved": true,
+          "confidence": 0.94,
+          "processingTime": "3.2s"
+        }
+      }
+    },
+    {
+      "step": "CV_ANALYSIS",
+      "status": "PROGRESS",
+      "timestamp": 1756480343767,
+      "duration": 0,
+      "message": "Running computer vision analysis..."
+    },
+    {
+      "step": "CV_ANALYSIS",
+      "status": "SUCCESS",
+      "timestamp": 1756480345269,
+      "duration": 0,
+      "message": "Computer vision confirmed product dispensed",
+      "data": {
+        "productDispensed": true,
+        "confidence": 0.94,
+        "productMatches": "Coca-Cola 350ml",
+        "anomaliesDetected": false,
+        "processingTimeMs": 1450
+      }
+    },
+    {
+      "step": "PAYMENT_INIT",
+      "status": "PROGRESS",
+      "timestamp": 1756480345270,
+      "duration": 0,
+      "message": "Processing payment for Coca-Cola 350ml - R$ 5.5"
+    },
+    {
+      "step": "PAYMENT_PROCESSING",
+      "status": "SUCCESS",
+      "timestamp": 1756480348272,
+      "duration": 3000,
+      "message": "Payment processed successfully",
+      "data": {
+        "paymentId": "pay_1756480348272",
+        "status": "confirmed",
+        "method": "pix",
+        "amount": 5.5,
+        "fee": 0.15
+      }
+    },
+    {
+      "step": "DOOR_CLOSE",
+      "status": "PROGRESS",
+      "timestamp": 1756480348273,
+      "duration": 0,
+      "message": "Closing container door..."
+    },
+    {
+      "step": "DOOR_CLOSE",
+      "status": "SUCCESS",
+      "timestamp": 1756480350274,
+      "duration": 0,
+      "message": "Container door closed and secured"
+    },
+    {
+      "step": "TRANSACTION_RECORD",
+      "status": "PROGRESS",
+      "timestamp": 1756480350274,
+      "duration": 0,
+      "message": "Creating transaction record..."
+    },
+    {
+      "step": "TRANSACTION_RECORD",
+      "status": "SUCCESS",
+      "timestamp": 1756480350274,
+      "duration": 0,
+      "message": "Transaction completed successfully",
+      "data": {
+        "id": "purchase_1756480330192_axsxv6cza",
+        "customerId": "customer@delicasa.com",
+        "controllerId": "piorches-mewv58x9-b827",
+        "product": {
+          "id": "prod_001",
+          "name": "Coca-Cola 350ml",
+          "price": 5.5,
+          "container_slot": "A1"
+        },
+        "amount": 5.5,
+        "timestamp": "2025-08-29T15:12:30.274Z",
+        "status": "completed",
+        "verification": {
+          "computerVisionConfirmed": true,
+          "paymentConfirmed": true,
+          "doorCycleCompleted": true
+        },
+        "images": [
+          "img_before_1756480340274",
+          "img_after_1756480345274"
+        ]
+      }
+    },
+    {
+      "step": "CUSTOMER_NOTIFICATION",
+      "status": "PROGRESS",
+      "timestamp": 1756480350274,
+      "duration": 0,
+      "message": "Sending purchase receipt..."
+    },
+    {
+      "step": "CUSTOMER_NOTIFICATION",
+      "status": "SUCCESS",
+      "timestamp": 1756480351275,
+      "duration": 0,
+      "message": "Digital receipt sent to customer",
+      "data": {
+        "receiptId": "receipt_1756480351275",
+        "deliveryMethod": "email",
+        "customer": "customer@delicasa.com"
+      }
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "totalDurationMs": 22506,
+    "totalDurationSec": "22.51",
+    "successfulSteps": 14,
+    "totalSteps": 14,
+    "successRate": "100.0",
+    "errorCount": 0,
+    "averageStepDuration": "1608"
+  }
+}

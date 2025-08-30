@@ -1,0 +1,75 @@
+{
+  "testSuite": "DeliCasa E2E Customer Purchase Flow",
+  "timestamp": "2025-08-29T15:04:48.426Z",
+  "duration": "1.38s",
+  "success": false,
+  "startTime": 1756479887050,
+  "steps": [
+    {
+      "step": "QR_SCAN",
+      "status": "PROGRESS",
+      "timestamp": 1756479887059,
+      "duration": 0,
+      "message": "Simulating QR code scan..."
+    },
+    {
+      "step": "QR_SCAN",
+      "status": "SUCCESS",
+      "timestamp": 1756479887059,
+      "duration": 0,
+      "message": "QR code scanned, session created",
+      "data": {
+        "sessionId": "session_1756479887059_b5p0wi9ys"
+      }
+    },
+    {
+      "step": "AUTH_REQUEST",
+      "status": "PROGRESS",
+      "timestamp": 1756479887060,
+      "duration": 0,
+      "message": "Testing authentication..."
+    },
+    {
+      "step": "AUTH_REQUEST",
+      "status": "SUCCESS",
+      "timestamp": 1756479887145,
+      "duration": 25,
+      "message": "Authentication successful",
+      "data": {
+        "userId": "customer@delicasa.com",
+        "role": "USER",
+        "sessionId": "session_1756479887059_b5p0wi9ys"
+      }
+    },
+    {
+      "step": "CONTROLLER_LIST",
+      "status": "PROGRESS",
+      "timestamp": 1756479887146,
+      "duration": 0,
+      "message": "Fetching available containers..."
+    },
+    {
+      "step": "PRODUCT_SELECTION",
+      "status": "ERROR",
+      "timestamp": 1756479888425,
+      "duration": 0,
+      "message": "controllers.find is not a function"
+    }
+  ],
+  "errors": [
+    {
+      "step": "PRODUCT_SELECTION",
+      "error": "controllers.find is not a function",
+      "timestamp": 1756479888425
+    }
+  ],
+  "metrics": {
+    "totalDurationMs": 1375,
+    "totalDurationSec": "1.38",
+    "successfulSteps": 2,
+    "totalSteps": 3,
+    "successRate": "66.7",
+    "errorCount": 1,
+    "averageStepDuration": "458"
+  }
+}
