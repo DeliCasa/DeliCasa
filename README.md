@@ -30,14 +30,40 @@ DeliCasa is a comprehensive IoT-based smart vending machine system that combines
 
 ## 🏁 Quick Start
 
+### 🐳 Docker Development Environment (Recommended)
+
+The fastest way to get started with DeliCasa development:
+
+```bash
+# Setup development environment
+./scripts/dev.sh setup
+
+# Start all services
+./scripts/dev.sh start
+
+# Check status
+./scripts/dev.sh status
+
+# View logs
+./scripts/dev.sh logs
+```
+
+**Services Available:**
+- **Next Client**: http://localhost:3000
+- **Bridge Server**: http://localhost:8080  
+- **Pi Orchestrator**: http://${PI_HOST}:9000 (on actual Pi hardware)
+
+**📚 [Complete Docker Development Guide](./DOCKER_DEVELOPMENT_GUIDE.md)**
+
 ### For Developers
 
+#### Traditional Development Setup
 1. **Environment Setup**: See [Docs/02-OPERATIONS/Environment/](./Docs/02-OPERATIONS/Environment/)
 2. **Development Scripts**: See [Docs/02-OPERATIONS/Scripts/](./Docs/02-OPERATIONS/Scripts/)
 3. **Development Guide**: See [Docs/01-TECHNICAL/Integration/](./Docs/01-TECHNICAL/Integration/)
 4. **Development Tools**: See [tools/](./tools/) - Testing and diagnostic utilities
 
-### VS Code Workspace
+#### VS Code Workspace
 
 Open `DeliCasa.code-workspace` in VS Code for the complete development environment with:
 
@@ -45,13 +71,34 @@ Open `DeliCasa.code-workspace` in VS Code for the complete development environme
 - Integrated tasks for building and running services
 - Debugging configurations for each service
 
+#### Docker Commands Quick Reference
+```bash
+# Development Environment Management
+./scripts/dev.sh start          # Start all services
+./scripts/dev.sh stop           # Stop all services
+./scripts/dev.sh restart        # Restart all services
+./scripts/dev.sh logs [service] # View logs
+./scripts/dev.sh status         # Check service status
+
+# Pi Orchestrator Management
+./scripts/dev.sh pi status      # Check Pi status
+./scripts/dev.sh pi start       # Start Pi service
+./scripts/dev.sh pi ssh         # SSH to Pi
+./scripts/dev.sh pi deploy      # Deploy code to Pi
+
+# Service-Specific Operations  
+./scripts/dev.sh exec next-client pnpm install
+./scripts/dev.sh exec bridge-server pnpm test
+./scripts/dev.sh build [service]
+```
+
 ### Cloudflare-Native Development
 
 All services are deployed on Cloudflare infrastructure:
 
 - **Next.js Client**: Deployed on Cloudflare Pages
 - **Bridge Server**: Deployed on Cloudflare Workers  
-- **Development**: Use individual service development commands (see each project's README)
+- **Development**: Docker Compose with deployed service integration
 
 ### For Stakeholders
 
