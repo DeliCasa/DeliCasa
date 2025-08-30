@@ -49,7 +49,9 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: 📋 Install Dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          cd next-client
+          pnpm install --frozen-lockfile
 
       - name: 🎨 Lint Next Client
         run: |
