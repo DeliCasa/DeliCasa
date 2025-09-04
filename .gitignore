@@ -35,3 +35,13 @@ pids
 .temp/
 *.tmp
 *.temp
+
+# Cloned component repositories (managed by orchestration scripts)
+BridgeServer/
+NextClient/
+PiOrchestrator/
+EspCamV2/
+Docs/
+
+# Old submodule remnants
+next-client/
